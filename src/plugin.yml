@@ -1,0 +1,9 @@
+name: Kingdoms
+version: 0.0.1
+description: Kingdoms server main plugin
+author: Claudiordev
+main: com.claudiordev.project.Main
+commands:
+  regen:
+    description: Regen the map broken so far
+    usage: /regen
