@@ -1,14 +1,7 @@
 package com.claudiordev.project.commands;
 
-import com.claudiordev.project.Main;
 import com.claudiordev.project.actions.RegenBlocks;
 import com.claudiordev.project.data.MySQL;
-import com.claudiordev.project.data.SQLLite;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -35,7 +28,7 @@ public class BlockRegen implements CommandExecutor {
                         ResultSet rs = mysql.retrieveAllData("SELECT *,max(action_date) as max_action_date FROM blocks_data group by id;");
 
                         //Execute RegenBlocks action
-                       new RegenBlocks(rs);
+                        new RegenBlocks(rs);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -44,7 +37,7 @@ public class BlockRegen implements CommandExecutor {
             }).start();
 
         } else {
-            commandSender.sendMessage("No arguments available yet");
+            commandSender.sendMessage("No arguments available");
         }
         return true;
     }

@@ -1,9 +1,7 @@
 package com.claudiordev.project.actions;
 
-import com.claudiordev.project.Main;
 import com.claudiordev.project.custom.DataBlock;
 import com.claudiordev.project.data.MySQL;
-import org.bukkit.block.BlockState;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,7 +9,6 @@ import java.util.ArrayList;
 public class BlockProcessor {
 
     static final ArrayList<DataBlock> blocks = new ArrayList<>();
-    private Thread processThread;
     MySQL mySQL = new MySQL();
 
     public BlockProcessor() {
@@ -19,7 +16,7 @@ public class BlockProcessor {
     }
 
     public void process() {
-        processThread = new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -54,9 +51,7 @@ public class BlockProcessor {
                     e.printStackTrace();
                 }
             }
-        });
-
-        processThread.start();
+        }).start();
     }
 
     public void add(DataBlock dataBlock) {

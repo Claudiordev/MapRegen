@@ -67,7 +67,7 @@ public class Main extends JavaPlugin {
     }
 
     /**
-     * Getter for plugin object
+     * Get plugin object
      * @return plugin object
      */
     public static Main getPlugin() {

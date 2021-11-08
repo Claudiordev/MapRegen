@@ -1,33 +1,22 @@
 package com.claudiordev.project.actions;
 
 import com.claudiordev.project.Main;
-import com.claudiordev.project.commands.BlockRegen;
 import com.claudiordev.project.custom.DataBlock;
 import com.claudiordev.project.data.MySQL;
-import com.claudiordev.project.data.SQLLite;
-import net.minecraft.server.v1_8_R3.BlockPosition;
-import net.minecraft.server.v1_8_R3.Explosion;
-import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.ExplosionPrimeEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.RegisteredListener;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.BlockIterator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 /**
- * Class that handles the events of breaking and placing blocks,
+ * Class that handles events of breaking and placing blocks,
  * to be restored automatically
  */
 public class HandleBlocks implements Listener {
@@ -36,13 +25,12 @@ public class HandleBlocks implements Listener {
 
     /**
      * Get the info of a broken block, Coordinates, Type and Data
-     * Deprecated Method (getData()), since it's an old version of API (1.8)
+     * Deprecated Method (getData()), since it's an old version of spigot API (1.8)
      * @param event of breaking a block
      */
-    @SuppressWarnings("deprecation")
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        //TODO, Check wheter the broken block is a tree facing up, having leaves nearby and add them to the database
+        //TODO, Check whether the broken block is a tree facing up, having leaves nearby and add them to the database
         Player player = event.getPlayer();
         Block block = event.getBlock();
         final String player_name = player.getDisplayName();
@@ -103,8 +91,12 @@ public class HandleBlocks implements Listener {
 
     @EventHandler
     public void onBlockPistonMove(BlockPistonExtendEvent event) {
+        Event e = event;
+        //Replica from BlockPlace Event within BlockPiston moved
+        this.onBlockPlace((BlockPlaceEvent) e);
 
     }
+
 }
 
 //TODO, Add expections for example, Chests on being broken, not to be regenerated
