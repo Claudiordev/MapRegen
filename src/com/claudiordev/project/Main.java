@@ -4,6 +4,7 @@ import com.claudiordev.project.actions.BlockProcessor;
 import com.claudiordev.project.actions.HandleBlocks;
 import com.claudiordev.project.commands.BlockRegen;
 import com.claudiordev.project.data.MySQL;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class Main extends JavaPlugin {
         //Get the Plugin Manager
         pm = getServer().getPluginManager();
 
-        //Register a new event, of the Class HandleBlocks, to use the events declared on it;
+        //Register Class that handles events
         pm.registerEvents(new HandleBlocks(),this);
 
         try {
@@ -37,8 +38,9 @@ public class Main extends JavaPlugin {
             e.printStackTrace();
         }
 
+        dependencies();
+
         /** Create main folder **/
-        //Check if directories exist
         if (!Files.exists(Paths.get("plugins/Kingdoms"))) {
             try {
                 Files.createDirectory(Paths.get("plugins/Kingdoms"));
@@ -59,7 +61,7 @@ public class Main extends JavaPlugin {
         //Activates Block Processor
         new BlockProcessor();
 
-        getLogger().info("Kingdoms Plugin Loaded");
+        getLogger().info("BlockRegen Plugin Loaded");
     }
 
     @Override
@@ -67,10 +69,20 @@ public class Main extends JavaPlugin {
     }
 
     /**
-     * Get plugin object
      * @return plugin object
      */
     public static Main getPlugin() {
         return plugin;
+    }
+
+    /**
+     * Check for plugins dependencies,
+     * usage on load of server/plugin.
+     */
+    private void dependencies() {
+        if (!Bukkit.getPluginManager().isPluginEnabled("WorldGuard") || !Bukkit.getPluginManager().isPluginEnabled("WorldEdit") ) {
+            getLogger().severe("* WorldGuard or WorldEdit is not installed or enabled. *");
+            getLogger().severe("* This function will be disabled*"); //TODO Specify functions that will not be available
+        }
     }
 }
