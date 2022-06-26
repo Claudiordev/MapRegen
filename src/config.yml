@@ -1,0 +1,38 @@
+Tag: '[BlockRegen]'
+Prefix: ''
+#Message shown on /blockregen
+Help_message:
+  - '&c[BlockRegen]'
+  - '&7/blockregen regenerate - Main Command, starts regeneration of world'
+  - '&7/blockregen count - Number of blocks pending to be regenerated'
+  - '&7/blockregen regenerate <name_of_region> - Regenerate specific WorldGuard region'
+#Radius distance of sound of blocks being regenerated when using the regeneration command
+Sound_radius: 5
+#Delay in miliseconds, between regen of each block using regeneration command
+Regen_delay: 500
+#Data Method, 1 for Local SQLLite, 2 for MySQL (BungeeCord Support)
+Data: 1
+#MySQL Server Username
+Username: 'root'
+#MySQL Server Password
+Password: 'default'
+#MySQL Server IP Address
+Server: localhost
+#MySQL Database
+Database: 'blockregen'
+#On saving map to be regenerated, save blocks placed, to be later removed when regenerating
+Placed_blocks: false
+#Store the decay of leaves
+Leaves_decay: true
+#Store the blocks that have been burned
+Burned_blocks: true
+#Stop the burning of blocks when executing a map regeneration
+Burn_regeneration: true
+#Schedule automatic regeneration
+#Execute an automatic regeneration every marked value of minutes
+Schedule_regeneration: true
+Schedule_regeneration_minutes: 60
+#Execute automatic regeneration inside only world_guard_regions
+World_guard_schedule: false
+World_guard_regions:
+  - 'Example 1'

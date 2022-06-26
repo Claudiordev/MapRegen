@@ -1,9 +1,10 @@
 name: BlockRegen
-version: 0.0.1
-description: Kingdoms server main plugin
+version: 1.0
+description: Test
 author: Claudiordev
-main: com.claudiordev.project.Main
+main: com.claudiordev.Main
+api-version: 1.15
 commands:
-  regen:
-    description: Regen the map broken so far
+  blockregen:
+    description: Main plugin command
     usage: /regen

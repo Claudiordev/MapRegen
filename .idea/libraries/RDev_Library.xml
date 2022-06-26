@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="RDev_Library">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/RDev_Library.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
