@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/BlockRegen.iml" filepath="$PROJECT_DIR$/.idea/BlockRegen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MapRegen.iml" filepath="$PROJECT_DIR$/.idea/MapRegen.iml" />
     </modules>
   </component>
 </project>

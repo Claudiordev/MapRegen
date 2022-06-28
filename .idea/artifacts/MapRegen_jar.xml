@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MapRegen:jar">
+    <output-path>$USER_HOME$/Desktop/RD Studios/Minecraft Spigot Plugin development/Server Tests/plugins</output-path>
+    <root id="archive" name="MapRegen.jar">
+      <element id="module-output" name="MapRegen" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/R-Library.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
