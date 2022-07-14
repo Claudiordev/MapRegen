@@ -64,8 +64,6 @@ public class HandleBlocks implements Listener {
 
             //Wakes up a single thread that is waiting on this object's monitor aka Thread
             BlockProcessor.blocks.notifyAll();
-
-
         }
     }
 

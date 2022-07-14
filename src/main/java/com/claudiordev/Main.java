@@ -3,7 +3,7 @@ package com.claudiordev;
 import com.claudiordev.actions.BlockProcessor;
 import com.claudiordev.actions.HandleBlocks;
 import com.claudiordev.actions.Scheduler;
-import com.claudiordev.commands.BlockRegen;
+import com.claudiordev.commands.MapRegen;
 import com.claudiordev.config.Configuration;
 import com.claudiordev.config.MessageFile;
 import com.claudiordev.utils.ColorCodes;
@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 
@@ -55,16 +56,18 @@ public class Main extends JavaPlugin {
 
         try {
             //"/regen" command instantiation
-            plugin.getCommand("blockregen").setExecutor(new BlockRegen());
+            plugin.getCommand("blockregen").setExecutor(new MapRegen());
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
             Main.getPlugin().getLogger().info("Error on loading plugin, please contact the supplier.");
         }
 
         /** Create main folder **/
-        if (!Files.exists(Paths.get("plugins/BlockRegen"))) {
+        Path path = Paths.get("plugins/MapRegen");
+
+        if (!Files.exists(path)) {
             try {
-                Files.createDirectory(Paths.get("plugins/BlockRegen"));
+                Files.createDirectory(path);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -108,14 +111,14 @@ public class Main extends JavaPlugin {
                     "action_date timestamp DEFAULT CURRENT_TIMESTAMP);";
 
             if (!data.connect().isClosed()) { //The connection creates the Data.db file
-                Main.getPlugin().getLogger().info("Database Connection detected");
+                Main.getPlugin().getLogger().info(MessageFile.getMessage("Database-Closed"));
                 data.query(query);
             } else {
-                Main.getPlugin().getLogger().info("Error on connecting to Database, check the config files and the database and try again!");
+                Main.getPlugin().getLogger().info(MessageFile.getMessage("Database-Error"));
                 plugin.setEnabled(false);
             }
         } catch (SQLException e) {
-            Main.getPlugin().getLogger().info("Error on connecting to Database, check the config files and the database and try again!");
+            Main.getPlugin().getLogger().info(MessageFile.getMessage("Database-Error"));
         }
 
         //Activates Block Processor, handles all the blocks to be processed into the database
@@ -125,7 +128,7 @@ public class Main extends JavaPlugin {
 
         if (Configuration.isScheduleRegeneration()) { Scheduler.getInstance(); }
 
-        getLogger().info("BlockRegen Plugin Loaded");
+        getLogger().info("MapRegen Plugin Loaded");
     }
 
     @Override
@@ -162,7 +165,7 @@ public class Main extends JavaPlugin {
     }
 
     /**
-     * Load a "messages.yml" file
+     * Load the "messages.yml" file
      */
     private void loadMessages() {
         MessageFile messagesFile = new MessageFile(getDataFolder(),"messages.yml");

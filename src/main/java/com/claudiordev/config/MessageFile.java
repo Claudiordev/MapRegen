@@ -22,7 +22,8 @@ public class MessageFile extends AbstractFile {
         this.add("Data-SQLLite-Import-Start", "&7Starting to import MySQL data into SQLLite Database...");
         this.add("Data-MySQL-Import-Success", "&aImported data to MySQL with success!");
         this.add("Data-MySQL-Import-Start", "&7Starting to import SQLLite data into MySQL Database...");
-        this.add("Data-MySQL-Connect-Error", "&cError connection to the Database, please check the config.yml ands logs, and try again!");
+        this.add("Database-Error", "Error connection to the Database, please check the config.yml ands logs, and try again!");
+        this.add("Database-Closed", "Database connection closed!");
         this.save();
     }
 

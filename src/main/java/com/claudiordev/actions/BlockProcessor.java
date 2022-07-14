@@ -65,17 +65,13 @@ public class BlockProcessor {
                                 a.setCharAt(a.lastIndexOf(","),';');
                             }
 
-                            Main.getPlugin().getServer().getLogger().info("QUERY: ");
-                            Main.getPlugin().getServer().getLogger().info(String.valueOf(a));
-                            System.out.println(Main.getData().query(a.toString()));
-
                             blocks.clear();
                         } else {
                             blocks.wait();
                         }
                     }
                 }
-            } catch (InterruptedException | SQLException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }).start();

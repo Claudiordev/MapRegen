@@ -1,14 +1,14 @@
-Tag: '[BlockRegen]'
+Tag: '[MapRegen]'
 Prefix: ''
-#Message shown on /blockregen
+#Message shown on /mapregen
 Help_message:
-  - '&c[BlockRegen]'
-  - '&7/blockregen regenerate - Main Command, starts regeneration of world'
-  - '&7/blockregen count - Number of blocks pending to be regenerated'
-  - '&7/blockregen regenerate <name_of_region> - Regenerate specific WorldGuard region'
+  - '&c[MapRegen]'
+  - '&7/mapregen regenerate - Main Command, starts regeneration of world'
+  - '&7/mapregen count - Number of blocks pending to be regenerated'
+  - '&7/mapregen regenerate <name_of_region> - Regenerate specific WorldGuard region'
 #Radius distance of sound of blocks being regenerated when using the regeneration command
 Sound_radius: 5
-#Delay in miliseconds, between regen of each block using regeneration command
+#Delay in milliseconds, between regen of each block using regeneration command
 Regen_delay: 500
 #Data Method, 1 for Local SQLLite, 2 for MySQL (BungeeCord Support)
 Data: 1

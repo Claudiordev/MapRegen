@@ -16,15 +16,15 @@ import java.sql.SQLException;
 /**
  * /blockregen in-game chat command handler
  */
-public class BlockRegen implements CommandExecutor {
+public class MapRegen implements CommandExecutor {
 
-    public BlockRegen() throws IOException {
+    public MapRegen() throws IOException {
     }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] strings) {
-        if (commandSender.hasPermission("blockregen.command")) {
-            if (label.equals("blockregen") && strings.length <= 0) {
+        if (commandSender.hasPermission("mapregen.command")) {
+            if (label.equals("mapregen") && strings.length <= 0) {
                 helpMessage(commandSender);
             } else {
                 switch (strings[0]) {
