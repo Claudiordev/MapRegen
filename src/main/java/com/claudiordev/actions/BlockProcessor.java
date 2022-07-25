@@ -22,8 +22,7 @@ public class BlockProcessor {
 
 
     /**
-     * Singleton of BlockProcessor, to always return a BlockProcessor
-     * @return
+     * @return Singleton of BlockProcessor
      */
     public static BlockProcessor getInstance() {
         if (blockProcessor == null) {
@@ -65,9 +64,7 @@ public class BlockProcessor {
                                 a.setCharAt(a.lastIndexOf(","),';');
                             }
 
-                            Main.getPlugin().getServer().getLogger().info("QUERY: ");
-                            Main.getPlugin().getServer().getLogger().info(String.valueOf(a));
-                            System.out.println(Main.getData().query(a.toString()));
+                            Main.getData().query(a.toString());
 
                             blocks.clear();
                         } else {
@@ -82,6 +79,6 @@ public class BlockProcessor {
     }
 
     public void add(DataBlock dataBlock) {
-        blocks.add(dataBlock);
+        if (!Configuration.getBlockExceptions().contains(dataBlock.getMaterial())) blocks.add(dataBlock);
     }
 }

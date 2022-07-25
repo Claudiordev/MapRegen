@@ -4,6 +4,9 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
+/**
+ * Custom Block Data
+ */
 public class DataBlock {
 
     private Location location;
@@ -28,10 +31,16 @@ public class DataBlock {
         return location;
     }
 
+    /**
+     * @return Enum of Material of Block
+     */
     public Material getMaterial(){
         return material;
     }
 
+    /**
+     * @return ID of the Block
+     */
     public byte getData(){
         return data;
     }

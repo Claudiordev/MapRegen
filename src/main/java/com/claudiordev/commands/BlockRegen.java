@@ -23,8 +23,8 @@ public class BlockRegen implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] strings) {
-        if (commandSender.hasPermission("blockregen.command")) {
-            if (label.equals("blockregen") && strings.length <= 0) {
+        if (commandSender.hasPermission("mapregen.command")) {
+            if (label.equals("mapregen") && strings.length <= 0) {
                 helpMessage(commandSender);
             } else {
                 switch (strings[0]) {

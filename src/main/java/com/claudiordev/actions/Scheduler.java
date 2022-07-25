@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  * Automatic Regeneration Scheduler.
- * If enabled on configurations, runs the regeneration of the map automatically.
+ * If enabled on configurations, runs the regeneration of the map automatically, every determined time
  */
 public class Scheduler{
     int timer = 0;
@@ -20,6 +20,9 @@ public class Scheduler{
         run();
     }
 
+    /**
+     * @return Singleton of Scheduler
+     */
     public static Scheduler getInstance() {
         if (scheduler == null) {
             scheduler = new Scheduler();

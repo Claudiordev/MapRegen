@@ -4,6 +4,8 @@
     <root id="archive" name="MapRegen.jar">
       <element id="module-output" name="MapRegen" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/R-Library.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/java/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/java/config.yml" />
     </root>
   </artifact>
 </component>

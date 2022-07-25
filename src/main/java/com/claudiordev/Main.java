@@ -55,16 +55,16 @@ public class Main extends JavaPlugin {
 
         try {
             //"/regen" command instantiation
-            plugin.getCommand("blockregen").setExecutor(new BlockRegen());
+            plugin.getCommand("mapregen").setExecutor(new BlockRegen());
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
             Main.getPlugin().getLogger().info("Error on loading plugin, please contact the supplier.");
         }
 
         /** Create main folder **/
-        if (!Files.exists(Paths.get("plugins/BlockRegen"))) {
+        if (!Files.exists(Paths.get("plugins/MapRegen"))) {
             try {
-                Files.createDirectory(Paths.get("plugins/BlockRegen"));
+                Files.createDirectory(Paths.get("plugins/MapRegen"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -81,7 +81,7 @@ public class Main extends JavaPlugin {
         switch (Configuration.getDataType()) {
             //SQLLite
             case 1:
-                data = new SQLLite("jdbc:sqlite:plugins/BlockRegen/db/Data.db",Main.getPlugin().getDataFolder().toString() + "\\db");
+                data = new SQLLite("jdbc:sqlite:plugins/MapRegen/db/Data.db",Main.getPlugin().getDataFolder().toString() + "\\db");
                 ((SQLLite) data).createdir();
                 break;
 
@@ -123,9 +123,10 @@ public class Main extends JavaPlugin {
 
         dependencies();
 
-        if (Configuration.isScheduleRegeneration()) { Scheduler.getInstance(); }
+        //Scheduler activation
+        //if (Configuration.isScheduleRegeneration()) { Scheduler.getInstance(); }
 
-        getLogger().info("BlockRegen Plugin Loaded");
+        getLogger().info("Map Regen Plugin Loaded");
     }
 
     @Override

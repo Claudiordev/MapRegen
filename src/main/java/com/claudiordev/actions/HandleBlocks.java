@@ -29,11 +29,9 @@ public class HandleBlocks implements Listener {
         synchronized (BlockProcessor.blocks) {
             DataBlock dataBlock = new DataBlock(event.getBlock(),"BREAK",event.getPlayer().getDisplayName());
 
-            if (!Configuration.getBlockExceptions().contains(dataBlock.getMaterial().name())){
-                BlockProcessor.blocks.add(dataBlock);
+            BlockProcessor.getInstance().add(dataBlock);
 
-                BlockProcessor.blocks.notifyAll();
-            }
+            BlockProcessor.blocks.notifyAll();
         }
     }
 
@@ -41,7 +39,7 @@ public class HandleBlocks implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         if (Configuration.isPlacedBlocks()) {
             synchronized (BlockProcessor.blocks) {
-                BlockProcessor.blocks.add(new DataBlock(event.getBlock(), "PLACE", event.getPlayer().getDisplayName()));
+                BlockProcessor.getInstance().add(new DataBlock(event.getBlock(), "PLACE", event.getPlayer().getDisplayName()));
 
                 BlockProcessor.blocks.notifyAll();
             }
@@ -56,7 +54,8 @@ public class HandleBlocks implements Listener {
         //Event Blocks Default Object List
         
         for(Block i: event.blockList()) {
-            blocks.add(new DataBlock(i,"BREAK","SERVER"));
+            DataBlock dataBlock = new DataBlock(i,"BREAK","SERVER");
+            if (!Configuration.getBlockExceptions().contains(dataBlock.getMaterial())) blocks.add(dataBlock);
         }
 
         synchronized (BlockProcessor.blocks) {
@@ -84,7 +83,7 @@ public class HandleBlocks implements Listener {
     public void onLeavesDecay(LeavesDecayEvent event) {
         if (Configuration.isLeavesDecay()) {
             synchronized (BlockProcessor.blocks) {
-                BlockProcessor.blocks.add(new DataBlock(event.getBlock(), "BREAK", "SERVER"));
+                BlockProcessor.getInstance().add(new DataBlock(event.getBlock(), "BREAK", "SERVER"));
 
                 //Wakes up a single thread that is waiting on this object's monitor aka Thread
                 BlockProcessor.blocks.notifyAll();
@@ -96,7 +95,7 @@ public class HandleBlocks implements Listener {
     public void onBlockBurnt(BlockBurnEvent event) {
         if (Configuration.isBurnedBlocks()) {
             synchronized (BlockProcessor.blocks) {
-                BlockProcessor.blocks.add(new DataBlock(event.getBlock(), "BREAK", "SERVER"));
+                BlockProcessor.getInstance().add(new DataBlock(event.getBlock(), "BREAK", "SERVER"));
 
                 BlockProcessor.blocks.notifyAll();
             }
