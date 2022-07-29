@@ -55,7 +55,7 @@ public class HandleBlocks implements Listener {
         
         for(Block i: event.blockList()) {
             DataBlock dataBlock = new DataBlock(i,"BREAK","SERVER");
-            if (!Configuration.getBlockExceptions().contains(dataBlock.getMaterial())) blocks.add(dataBlock);
+            if (!Configuration.getBlockExceptions().contains(dataBlock.getMaterial().toString())) blocks.add(dataBlock);
         }
 
         synchronized (BlockProcessor.blocks) {

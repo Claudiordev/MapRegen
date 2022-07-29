@@ -8,6 +8,7 @@ import com.claudiordev.utils.ColorCodes;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -16,9 +17,9 @@ import java.sql.SQLException;
 /**
  * /blockregen in-game chat command handler
  */
-public class BlockRegen implements CommandExecutor {
+public class MapRegen implements CommandExecutor {
 
-    public BlockRegen() throws IOException {
+    public MapRegen() throws IOException {
     }
 
     @Override
@@ -39,13 +40,11 @@ public class BlockRegen implements CommandExecutor {
 
                     case "count":
                         try {
-                            ResultSet rs = Main.getData().retrieve("SELECT count(id) as blocks from blocks_data;");
-                            rs.first(); //Go to initial position of result set
+                            ResultSet rs = Main.getData().retrieve("SELECT count(id) from blocks_data;");
 
-                            int blocks = rs.getInt("blocks");
+                            int blocks = rs.getInt("count(id)");
                             commandSender.sendMessage(ColorCodes.executeReplace(MessageFile.getMessage("Cmd-count").replace("{0}",String.valueOf(blocks))));
-
-
+                            rs.close();
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
@@ -77,18 +76,17 @@ public class BlockRegen implements CommandExecutor {
      * Execute regeneration in a new Thread
      */
     void regenThread(CommandSender commandSender) {
-        new Thread(new Runnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 try {
                     ResultSet rs = Main.getData().retrieve("SELECT *,max(action_date) as max_action_date FROM blocks_data group by id;");
 
-                    new RegenBlocks(rs,commandSender);
-
+                    RegenBlocks.getInstance(rs,commandSender).run();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        }.runTaskAsynchronously(Main.getPlugin());
     }
 }

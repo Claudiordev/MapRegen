@@ -25,10 +25,26 @@ public class RegenBlocks {
     CommandSender commandSender;
     static boolean running;
 
+    private static RegenBlocks regenBlocks;
+
     public RegenBlocks(ResultSet rs,CommandSender commandSender) {
         this.rs = rs;
         this.commandSender = commandSender;
         run();
+    }
+
+    /**
+     * Singleton for RegenBlocks
+     * @param rs
+     * @param commandSender
+     * @return
+     */
+    public static RegenBlocks getInstance(ResultSet rs, CommandSender commandSender) {
+        if (regenBlocks == null){
+            regenBlocks = new RegenBlocks(rs,commandSender);
+        }
+
+        return regenBlocks;
     }
 
     public void run(){
@@ -37,6 +53,8 @@ public class RegenBlocks {
             public void run() {
                 try {
                     String max_action_date = "";
+
+                    System.out.println(rs.getFetchSize());
 
                     while (rs.next()) {
                         if (!running) running = true;

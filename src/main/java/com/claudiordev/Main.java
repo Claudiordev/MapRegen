@@ -3,7 +3,7 @@ package com.claudiordev;
 import com.claudiordev.actions.BlockProcessor;
 import com.claudiordev.actions.HandleBlocks;
 import com.claudiordev.actions.Scheduler;
-import com.claudiordev.commands.BlockRegen;
+import com.claudiordev.commands.MapRegen;
 import com.claudiordev.config.Configuration;
 import com.claudiordev.config.MessageFile;
 import com.claudiordev.utils.ColorCodes;
@@ -55,7 +55,7 @@ public class Main extends JavaPlugin {
 
         try {
             //"/regen" command instantiation
-            plugin.getCommand("mapregen").setExecutor(new BlockRegen());
+            plugin.getCommand("mapregen").setExecutor(new MapRegen());
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
             Main.getPlugin().getLogger().info("Error on loading plugin, please contact the supplier.");
@@ -124,7 +124,9 @@ public class Main extends JavaPlugin {
         dependencies();
 
         //Scheduler activation
-        //if (Configuration.isScheduleRegeneration()) { Scheduler.getInstance(); }
+        if (Configuration.isScheduleRegeneration()) {
+            Scheduler.getInstance().runTaskAsynchronously(Main.getPlugin());
+        }
 
         getLogger().info("Map Regen Plugin Loaded");
     }
